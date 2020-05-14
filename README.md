@@ -1,17 +1,17 @@
-# Projekt_TOM
-Projekt realizowany w ramach przedmiotu Techniki obrazowania medycznego 2020.
+# Projekt_TOM <br />
+Projekt realizowany w ramach przedmiotu Techniki obrazowania medycznego 2020. <br />
 
-File structure:
-Projekt_TOM/
-├── ourcode.py files
-├── kits19/
-├── img_cache/
-│   ├── seg/
-│   │	├── 0_0.npy
-│   │	├── 0_1.npy
-│   │	├── ...
-│   ├── vol/
-│   │	├── 0_0.npy
-│   │	├── 0_1.npy
-│   │	├── ...
-...
+File structure: <br />
+Projekt_TOM/ <br />
+├── ourcode.py files <br />
+├── kits19/ <br />
+├── img_cache/  <br />
+│   ├── seg/  <br />
+│   │	├── 0_0.npy <br />
+│   │	├── 0_1.npy <br />
+│   │	├── ... <br />
+│   ├── vol/ <br />
+│   │	├── 0_0.npy <br />
+│   │	├── 0_1.npy <br />
+│   │	├── ... <br />
+... <br />

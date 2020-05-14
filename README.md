@@ -1,7 +1,7 @@
 # Projekt_TOM
 Projekt realizowany w ramach przedmiotu Techniki obrazowania medycznego 2020.
 
-File structure:
+File structure: <br>
 Projekt_TOM/
 ├── ourcode.py files
 ├── img_cache/

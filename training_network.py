@@ -87,7 +87,7 @@ def dice_coef_loss(y_true, y_pred):
 #%%Defining and training Unet model
 model = Unet('mobilenet',encoder_weights='imagenet', classes = 3, input_shape=(None, None, 3))
 
-optimizer = Adam(lr=3e-05,beta_1=0.9, beta_2=0.999, decay=0.00)
+optimizer = Adam(lr=1e-03,beta_1=0.9, beta_2=0.999, decay=0.02)
 model.compile(optimizer= optimizer, loss=dice_coef_loss,
               metrics=['accuracy'])
 model.summary()

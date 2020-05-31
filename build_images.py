@@ -59,7 +59,7 @@ def overlay(volume_ims, segmentation_ims, segmentation, alpha):
 def check_path_create_if_not_exist(path):
     if not os.path.exists(path):
         os.makedirs(path)
-
+import matplotlib.pyplot as plt
 def save_vol_and_seg_from_cid(case_id,base_dir,sub_dir):
     volpath=base_dir + "/" + sub_dir + '/vol/'
     segpath = base_dir + "/" + sub_dir + '/seg/'
@@ -75,6 +75,7 @@ def save_vol_and_seg_from_cid(case_id,base_dir,sub_dir):
 
     ready_vol=os.listdir(volpath)
     ready_seg = os.listdir(segpath)
+
     for i in tqdm(range(vol.shape[0])):
         case_str="case{}_{:05d}.png".format(case_id,i)
         volimgpath = volpath + case_str
@@ -83,12 +84,12 @@ def save_vol_and_seg_from_cid(case_id,base_dir,sub_dir):
         if case_str in ready_vol:
             print(volpath+case_str+' already satisfied')
         else:
-            imwrite(str(volimgpath), vol[i])
+            plt.imsave(str(volimgpath), vol[i],cmap='gray')
 
         if case_str in ready_seg:
             print(segpath+case_str+' already satisfied')
         else:
-            imwrite(str(segimgpath), seg[i])
+            plt.imsave(str(segimgpath), seg[i],cmap='gray')
 
 if __name__ == "__main__":
     for i in tqdm(range(210)):

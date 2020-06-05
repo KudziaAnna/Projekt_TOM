@@ -18,6 +18,7 @@ BATCH_SIZE = 16
 TARGET_SIZE = (256,256)
 NUM_DEV_SAMPLES =4064
 NUM_TRAIN_SAMPLES = 37250 
+NUM_TEST_SAMPLES = 4111
 EPOCHS = 30
 H = 256
 W = 256
@@ -174,5 +175,7 @@ mask_test_generator = mask_test_datagen.flow_from_directory(
     seed=seed)
 test_generator = zip(image_test_generator, mask_test_generator)
 
-loss, dc = model.evaluate_generator(test_generator, verbose=1)
+loss, dc = model.evaluate_generator(test_generator,
+                                    steps = NUM_TEST_SAMPLES/BATCH_SIZE,
+                                    verbose=1)
 print("Untrained test data, dice score: {:5.2f}%".format(100*dc))

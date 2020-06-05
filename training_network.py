@@ -154,7 +154,7 @@ model.fit_generator(train_generator,
                     callbacks=[callback],
                     verbose = 1)
 
-mc = ModelCheckpoint('best_model.h5', monitor='val_loss', save_best_only=True)
+mc = ModelCheckpoint('Unet_model.h5', monitor='val_loss', save_best_only=True)
 
 #%% Model evaluation
 

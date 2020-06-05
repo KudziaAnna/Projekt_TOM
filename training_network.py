@@ -76,7 +76,7 @@ def dice_coef2(y_true, y_pred):
     score0 = dice_coef(y_true[:, :, :, 0], y_pred[:, :, :, 0])
     score1 = dice_coef(y_true[:, :, :, 1], y_pred[:, :, :, 1])
     score2 = dice_coef(y_true[:, :, :, 2], y_pred[:, :, :, 2])
-    score = 0.5 * score0 + 0.3 * score1+0.2*score2
+    score = 0.5 * score0 + 0.5 * score1+0.5*score2
 
     return score
 
@@ -87,7 +87,7 @@ def dice_coef_loss(y_true, y_pred):
 #%%Defining and training Unet model
 model = Unet('mobilenet',encoder_weights='imagenet', classes = 3, input_shape=(None, None, 3))
 
-optimizer = Adam(lr=1e-03,beta_1=0.9, beta_2=0.999, decay=0.02)
+optimizer = Adam(lr=3e-05,beta_1=0.9, beta_2=0.999, decay=0.00)
 model.compile(optimizer= optimizer, loss=dice_coef_loss,
               metrics=['accuracy'])
 model.summary()

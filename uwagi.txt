@@ -1,0 +1,8 @@
+Rozwiązanie wygląda na poprawne, jednak:
+
+1) W końcowym raporcie wyniki powinny zostać przedstawione zdecydowanie bardziej szczegółowo, tj.
+- osobno dla nowotworu i nerki
+- średnia, odchylenie standardowe (bądź przedział ufności), wartość maksymalna, minimalna,
+- należy załączyć przykładowe wizualizacje segmentacji
+- proponuję dokonać augmetnacji danych wejściowych (obroty/zmiany intensywności)
+- w jaki sposób wyznaczono Dice? W odniesieniu do przypadku czy przekroju? Wyniki powinny zostać podane dla przypadków (tj. jedna wartość dla jednego przypadku).

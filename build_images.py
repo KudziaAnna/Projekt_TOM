@@ -58,18 +58,15 @@ def save_vol_and_seg_from_cid(case_id,base_dir,sub_dir,hu_min=DEFAULT_HU_MIN,hu_
         else:
             plt.imsave(str(flip_volimgpath), flipped_vol, cmap='gray')
 
-        if sub_dir=='test':
-            pass
+        if case_str in ready_seg:
+            print(segpath+case_str+' already satisfied')
         else:
-            if case_str in ready_seg:
-                print(segpath+case_str+' already satisfied')
-            else:
-                plt.imsave(str(segimgpath), seg[i],cmap='gray')
+            plt.imsave(str(segimgpath), seg[i],cmap='gray')
 
-            if flip_case_str in ready_seg:
-                print(segpath + flip_case_str + ' already satisfied')
-            else:
-                plt.imsave(str(flip_segimgpath), flipped_seg, cmap='gray')
+        if flip_case_str in ready_seg:
+            print(segpath + flip_case_str + ' already satisfied')
+        else:
+            plt.imsave(str(flip_segimgpath), flipped_seg, cmap='gray')
 
 
 if __name__ == "__main__":

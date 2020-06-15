@@ -10,9 +10,8 @@ import numpy as np
 
 BATCH_SIZE = 16
 TARGET_SIZE = (256,256)
-NUM_DEV_SAMPLES =4064
-NUM_TRAIN_SAMPLES = 37250 
-NUM_TEST_SAMPLES = 4111
+NUM_DEV_SAMPLES = 8126
+NUM_TRAIN_SAMPLES = 74500
 EPOCHS = 30
 H = 256
 W = 256
@@ -23,10 +22,8 @@ path_train_X = 'train/VOL'
 path_dev_X = 'dev/VOL'
 path_train_Y = 'train/SEG'
 path_dev_Y = 'dev/SEG'
-path_test_X = 'test/VOL'
-path_test_Y = 'test/SEG'
 
-#%%Defining dice_loss function and metric die_coef2
+#%%Defining dice_loss function and metric dice_coef2
 def dice_coef(y_true, y_pred):
     smooth = 1.0
     y_true_f = K.flatten(y_true)
@@ -148,28 +145,4 @@ model.fit_generator(train_generator,
                     callbacks=[callback],
                     verbose = 1)
 
-mc = ModelCheckpoint('Unet_model.h5', monitor='val_loss', save_best_only=True)
-
-#%% Model evaluation
-
-image_test_datagen =  ImageDataGenerator(rescale = 1./255)
-mask_test_datagen = ImageDataGenerator(rescale = 1/127, dtype = 'int')
-seed =1
-image_test_generator = image_test_datagen.flow_from_directory(
-    directory = path_test_X,
-    target_size = TARGET_SIZE,
-    batch_size = BATCH_SIZE,
-    class_mode=None,
-    seed=seed)
-mask_test_generator = mask_test_datagen.flow_from_directory(
-    directory = path_test_Y,
-    target_size = TARGET_SIZE,
-    batch_size = BATCH_SIZE,
-    class_mode=None,
-    seed=seed)
-test_generator = zip(image_test_generator, mask_test_generator)
-
-loss, dc = model.evaluate_generator(test_generator,
-                                    steps = NUM_TEST_SAMPLES/BATCH_SIZE,
-                                    verbose=1)
-print("Untrained test data, dice score: {:5.2f}%".format(100*dc))
+model.save('Unet_model')

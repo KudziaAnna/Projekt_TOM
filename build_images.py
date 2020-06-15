@@ -70,7 +70,7 @@ def save_vol_and_seg_from_cid(case_id,base_dir,sub_dir,hu_min=DEFAULT_HU_MIN,hu_
 
 
 if __name__ == "__main__":
-    for i in tqdm(range(3)):
+    for i in tqdm(range(210)):
         if (i>=0 and i<TRAIN_SIZE):
             folder='train'
         elif (i>=TRAIN_SIZE and i<TRAIN_SIZE+DEV_SIZE):

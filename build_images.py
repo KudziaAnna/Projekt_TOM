@@ -19,9 +19,12 @@ imageio.core.util._precision_warn = silence_imageio_warning
 
 
 def save_vol_and_seg_from_cid(case_id,base_dir,sub_dir,hu_min=DEFAULT_HU_MIN,hu_max=DEFAULT_HU_MAX):
-
-    volpath=base_dir + "/" + sub_dir + '/VOL/vol/'
-    segpath = base_dir + "/" + sub_dir + '/SEG/seg/'
+    if sub_dir=='test':
+        volpath = base_dir + "/" + sub_dir + '/case_' + str(case_id) + "/VOL/"
+        segpath = base_dir + "/" + sub_dir + '/case_' + str(case_id) + "/SEG/"
+    else:
+        volpath=base_dir + "/" + sub_dir + '/VOL/vol/'
+        segpath = base_dir + "/" + sub_dir + '/SEG/seg/'
 
     check_path_create_if_not_exist(volpath)
     check_path_create_if_not_exist(segpath)
@@ -37,22 +40,40 @@ def save_vol_and_seg_from_cid(case_id,base_dir,sub_dir,hu_min=DEFAULT_HU_MIN,hu_
 
     for i in tqdm(range(vol.shape[0])):
         case_str="case{}_{:05d}.png".format(case_id,i)
+        flip_case_str = "case{}_{:05d}_flipped.png".format(case_id, i)
         volimgpath = volpath + case_str
         segimgpath = segpath + case_str
+        flip_volimgpath = volpath + flip_case_str
+        flip_segimgpath = segpath + flip_case_str
+        flipped_vol = vol[i][:, ::-1]
+        flipped_seg = seg[i][:, ::-1]
 
         if case_str in ready_vol:
             print(volpath+case_str+' already satisfied')
         else:
             plt.imsave(str(volimgpath), vol[i],cmap='gray')
 
-        if case_str in ready_seg:
-            print(segpath+case_str+' already satisfied')
+        if flip_case_str in ready_vol:
+            print(volpath + flip_case_str + ' already satisfied')
         else:
-            plt.imsave(str(segimgpath), seg[i],cmap='gray')
+            plt.imsave(str(flip_volimgpath), flipped_vol, cmap='gray')
+
+        if sub_dir=='test':
+            pass
+        else:
+            if case_str in ready_seg:
+                print(segpath+case_str+' already satisfied')
+            else:
+                plt.imsave(str(segimgpath), seg[i],cmap='gray')
+
+            if flip_case_str in ready_seg:
+                print(segpath + flip_case_str + ' already satisfied')
+            else:
+                plt.imsave(str(flip_segimgpath), flipped_seg, cmap='gray')
 
 
 if __name__ == "__main__":
-    for i in tqdm(range(210)):
+    for i in tqdm(range(3)):
         if (i>=0 and i<TRAIN_SIZE):
             folder='train'
         elif (i>=TRAIN_SIZE and i<TRAIN_SIZE+DEV_SIZE):

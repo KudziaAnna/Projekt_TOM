@@ -8,7 +8,7 @@ import tensorflow as tf
 from keras.layers import Input, concatenate, Conv2D, MaxPooling2D, Conv2DTranspose
 import numpy as np
 
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 TARGET_SIZE = (256,256)
 NUM_DEV_SAMPLES = 8126
 NUM_TRAIN_SAMPLES = 74500
